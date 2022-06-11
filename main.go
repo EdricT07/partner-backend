@@ -24,6 +24,6 @@ func main() {
 	// set the routes of the webapp
 	routes.Setup(app)
 
-	app.Listen(":" + os.Getenv("APPPORT"))
+	app.Listen(":" + os.Getenv("PORT"))
 
 }
