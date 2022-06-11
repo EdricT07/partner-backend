@@ -1,15 +1,24 @@
 package database
 
 import (
+	"os"
+
 	"github.com/EdricT07/workhours/models"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
 func Connect() {
-	connection, err := gorm.Open(mysql.Open("partner:v~Smb0231@tcp(127.0.0.1:3306)/enquete?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
+	var dbuser string = os.Getenv("DBUSER")
+	var dbpassword string = os.Getenv("DBPASSWORD")
+	var ip string = os.Getenv("IP")
+	var port string = os.Getenv("PORT")
+	var dbname string = os.Getenv("DBNAME")
+
+	dsn := "host=" + ip + " user=" + dbuser + " password=" + dbpassword + " dbname=" + dbname + " port=" + port + " sslmode=disable TimeZone=Europe/Amsterdam"
+	connection, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic("could not connect to the database")

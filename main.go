@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	database.Connect()
 
+	database.Connect()
 	app := fiber.New()
 
 	//default logger config
@@ -24,6 +24,6 @@ func main() {
 	// set the routes of the webapp
 	routes.Setup(app)
 
-	app.Listen(os.Getenv("PORT"))
+	app.Listen(":" + os.Getenv("APPPORT"))
 
 }
