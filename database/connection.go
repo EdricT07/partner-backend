@@ -11,14 +11,8 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	var dbuser string = os.Getenv("DBUSER")
-	var dbpassword string = os.Getenv("DBPASSWORD")
-	var ip string = os.Getenv("IP")
-	var port string = os.Getenv("PORT")
-	var dbname string = os.Getenv("DBNAME")
-
-	dsn := "host=" + ip + " user=" + dbuser + " password=" + dbpassword + " dbname=" + dbname + " port=" + port + " sslmode=disable TimeZone=Europe/Amsterdam"
-	connection, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	var dbconn string = os.Getenv("DATABASE_URL")
+	connection, err := gorm.Open(postgres.Open(dbconn), &gorm.Config{})
 
 	if err != nil {
 		panic("could not connect to the database")
