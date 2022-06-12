@@ -1,18 +1,16 @@
 package database
 
 import (
-	"os"
-
 	"github.com/EdricT07/workhours/models"
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
 func Connect() {
-	var dbconn string = os.Getenv("DATABASE_URL")
-	connection, err := gorm.Open(postgres.Open(dbconn), &gorm.Config{})
+	var dbconn string = "tester:secret@tcp(db:3306)/test"
+	connection, err := gorm.Open(mysql.Open(dbconn), &gorm.Config{})
 
 	if err != nil {
 		panic("could not connect to the database")
